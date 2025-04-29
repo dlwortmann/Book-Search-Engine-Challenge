@@ -1,6 +1,6 @@
-import { BookDocument } from '../models/Book';
+import { BookDocument } from '../models/Book.js';
 import User from '../models/index.js'
-import { signToken, AuthenticationError } from "../services/auth";
+import { signToken, AuthenticationError } from "../services/auth.js";
 
 // created interfaces 
 interface Book {
@@ -77,6 +77,20 @@ const resolvers = {
                 .select('-__v -password')
                 
         },
+
+        searchBooks: async (_parent: unknown, { query }: any) => {
+            const response = await fetch (`https://www.googleapis.com/books/v1/volumes?q=${query}`)
+            const { items } = await response.json();
+
+            return items.map((book: any) => ({
+                bookId: book.id,
+                authors: book.volumeInfo.authors || ['No author to display'],
+                title: book.volumeInfo.title,
+                description: book.volumeInfo.description || 'No description to display',
+                image: book.volumeInfo.imageLinks?.thumbnail || '',
+                link: book.volumeInfo.infoLink || ''
+            }))
+        }
     },
 
 

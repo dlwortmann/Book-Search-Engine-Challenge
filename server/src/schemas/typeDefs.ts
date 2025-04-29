@@ -44,6 +44,7 @@ const typeDefs = `
         me: User
         users: [User]
         user(username: String!): User
+        searchBooks(query: String!): [Book]!
     }
 
     type Mutation {
