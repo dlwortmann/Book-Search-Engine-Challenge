@@ -35,6 +35,10 @@ const bookSchema = new Schema<BookDocument>({
     type: String,
     required: true,
   },
-});
+},
+{
+  _id: false
+}
+);
 
 export default bookSchema;
