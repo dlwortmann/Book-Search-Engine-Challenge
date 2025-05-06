@@ -8,13 +8,7 @@ import type { Book } from '../models/Book.js';
 
 
 const SavedBooks = () => {
-  const {loading, data, refetch } = useQuery(GET_ME, {
-    context: {
-      headers: {
-        authorization: `Bearer ${Auth.getToken()}`
-      }
-    }
-  });
+  const {loading, data, refetch } = useQuery(GET_ME);
   
   const [removeBook] = useMutation(REMOVE_BOOK)
   const userData = data?.me || { username: '', savedBooks: [] }
@@ -22,12 +16,7 @@ const SavedBooks = () => {
   const handleDeleteBook = async (bookId: string) => {
     try {
       await removeBook({
-        variables: { bookId },
-        context: {
-          headers: {
-            authorization: `Bearer ${Auth.getToken()}`
-          }
-        }
+        variables: { bookId }
       })
 
       removeBookId(bookId)
