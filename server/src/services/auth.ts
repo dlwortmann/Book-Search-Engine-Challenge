@@ -3,7 +3,7 @@ import { GraphQLError } from 'graphql';
 import dotenv from 'dotenv';
 dotenv.config();
 
-console.log('JWT_SECRET_KEY:', process.env.JWT_SECRET_KEY)
+//console.log('JWT_SECRET_KEY:', process.env.JWT_SECRET_KEY)
 
 export const authenticateToken = ({ req }: any) => {
   // Allows token to be sent via req.body, req.query, or headers
