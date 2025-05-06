@@ -6,8 +6,6 @@ import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import {typeDefs, resolvers } from './schemas/index.js'
 import { authenticateToken } from './services/auth.js';
-import cors from 'cors'
-
 
 const server = new ApolloServer({
   typeDefs,
@@ -20,11 +18,6 @@ const startApolloServer = async () => {
 
   const PORT = process.env.PORT || 3001;
   const app = express();
-
-  app.use(cors({
-    origin: ['http://localhost:3000', 'https://book-search-engine-challenge-rdtm.onrender.com'], 
-    credentials: true,
-  }));
 
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json())

@@ -3,15 +3,12 @@ import { Outlet } from 'react-router-dom';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import Auth from './utils/auth';
-
-
 import Navbar from './components/Navbar';
  
-const apiUrl = 'https://book-search-engine-challenge-rdtm.onrender.com/graphql'
 
 const httpLink = createHttpLink({
-  uri: apiUrl,
-  credentials: 'include'
+  uri: '/graphql',
+  //credentials: 'include'
 });
 
 const authLink = setContext((_, { headers }) => {
