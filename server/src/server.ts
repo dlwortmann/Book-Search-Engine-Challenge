@@ -23,7 +23,7 @@ const startApolloServer = async () => {
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json())
 
-  app.use('/graphql', expressMiddleware(server as any,
+  app.use('https://book-search-engine-challenge-rdtm.onrender.com/graphql', expressMiddleware(server as any,
     {
       context: authenticateToken as any
     }
