@@ -6,6 +6,7 @@ import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import {typeDefs, resolvers } from './schemas/index.js'
 import { authenticateToken } from './services/auth.js';
+import cors from 'cors'
 
 
 const server = new ApolloServer({
@@ -20,10 +21,15 @@ const startApolloServer = async () => {
   const PORT = process.env.PORT || 3001;
   const app = express();
 
+  app.use(cors({
+    origin: ['http://localhost:3000', 'https://book-search-engine-challenge-rdtm.onrender.com'], 
+    credentials: true,
+  }));
+
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json())
 
-  app.use('https://book-search-engine-challenge-rdtm.onrender.com/graphql', expressMiddleware(server as any,
+  app.use('/graphql', expressMiddleware(server as any,
     {
       context: authenticateToken as any
     }
@@ -35,7 +41,7 @@ const startApolloServer = async () => {
     app.get('*', (_req: Request, res: Response) => {
       res.sendFile(path.join(__dirname, '../client/dist/index.html'))
     })
-  }
+  } 
 
   app.listen(PORT, () => {
     console.log(`API server running on port ${PORT}!`)

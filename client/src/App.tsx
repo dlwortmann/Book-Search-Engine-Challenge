@@ -4,10 +4,14 @@ import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@ap
 import { setContext } from '@apollo/client/link/context';
 import Auth from './utils/auth';
 
+
 import Navbar from './components/Navbar';
+ 
+const apiUrl = 'https://book-search-engine-challenge-rdtm.onrender.com/graphql'
 
 const httpLink = createHttpLink({
-  uri: 'https://book-search-engine-challenge-rdtm.onrender.com//graphql',
+  uri: apiUrl,
+  credentials: 'include'
 });
 
 const authLink = setContext((_, { headers }) => {
