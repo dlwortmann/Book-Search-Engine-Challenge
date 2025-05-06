@@ -7,7 +7,7 @@ import Navbar from './components/Navbar';
  
 
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: 'https://book-search-engine-challenge-wg7r.onrender.com//graphql',
   //credentials: 'include'
 });
 
